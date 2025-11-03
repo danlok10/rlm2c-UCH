@@ -1,0 +1,55 @@
+Config(
+    event_dispatcher: (
+        // Toggle controller emulation
+        toggle_key: Grave,
+    ),
+
+    event_handler: (
+        // Higher sensitivity for quick cursor movement in build mode
+        sensitivity: 1.75, // tuned for ~3200 DPI
+
+        // Slightly smoother movement for cursor precision
+        sample_window: (secs: 0, nanos: 6000000), // 6ms
+        spin_period: (secs: 0, nanos: 2000000),   // 2ms
+
+        // Audio cue for oversteer (can help with too-fast mouse motion)
+        oversteer_alert_enabled: true,
+        oversteer_alert_threshold: 2.0,
+        oversteer_alert: (volume: 0.04, frequency: 420),
+
+        // Full analog control for both axes
+        analog_mask: (true, true),
+
+        // Fix for mouse button state
+        mouse_button_fix: true,
+
+        binds: {
+            // Movement via mouse (optional fine control in menus/build)
+            Mouse(Left): Analog(-1, 0),  // Move left
+            Mouse(Right): Analog(1, 0),  // Move right
+            Mouse(Up): Analog(0, -1),    // Move up (build mode)
+            Mouse(Down): Analog(0, 1),   // Move down (build mode)
+
+            // Core gameplay
+            Keyboard(D): Analog(1, 0),   // Move right
+            Keyboard(A): Analog(-1, 0),  // Move left
+            Keyboard(W): Analog(0, -1),   // Move up
+            Keyboard(S): Analog(0, 1),  // Move down
+            Keyboard(Space): Button(A),      // Jump
+            Keyboard(E): Button(X),      // Grab/Use
+            Keyboard(F): Button(Y), // Taunt
+            Keyboard(Escape): Button(B),  // Cancel/Back
+
+            // Build-phase helpers
+            Mouse(Middle): Button(LeftThumb),      // Rotate object
+            Mouse(Button4): Button(RightShoulder), // Quick confirm/place
+            Mouse(Button5): Button(LeftShoulder),  // Undo
+
+            // Camera & debug keys (optional)
+            Keyboard(Num1): Button(Start), // Toggle UI
+            Keyboard(Num2): Button(Back),  // Change camera
+            Keyboard(R): Button(Start),
+            Keyboard(P): Button(Back),
+        },
+    )
+)
